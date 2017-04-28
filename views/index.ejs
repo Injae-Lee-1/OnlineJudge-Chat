@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Codigm mission</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      background-image: url('images/home-bg.jpg');
+      background-size: auto;
+    }
+	  
+    .main-container {
+      color: white;
+      text-align: center;
+      margin-top: 25%;
+      margin-bottom: 25%;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/"><span class="glyphicon glyphicon-home" style="margin-top: 10px; color: black; font-size: 50px;"></span></a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+      <ul class="nav navbar-nav navbar-right">
+        <% if (!auth) { %>
+        <li><a class="btn btn-link navbar-btn" href='/login'>Sign In</a></li>
+        <li>&nbsp;&nbsp;&nbsp;</li>
+        <li><a class="btn btn-link navbar-btn" href='/signup'>Sign Up</a></li>
+        <% } else { %>
+        <li><a class="btn btn-link navbar-btn" href='/login/logout'>Logout</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br><br><br><br>
+<div class="container main-container">
+    <h1><Strong>Codigm mission Page</Strong></h1>
+    <a href="/main" class="btn btn-default" >메인페이지로 이동</a>
+</div>
+
+</body>
+</html>

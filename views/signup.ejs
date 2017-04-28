@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src='javascripts/signup.js'></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/"><span class="glyphicon glyphicon-home" style="margin-top: 10px; color: black; font-size: 50px;"></span></a>
+    </div>
+    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="btn btn-link navbar-btn" href='/login'>Sign In</a></li>
+        <li>&nbsp;&nbsp;&nbsp;</li>
+        <li><a class="btn btn-link navbar-btn" href='/signup'>Sign Up</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br><br><br><br>
+<h1 align="center">회원가입</h1>
+<br>
+<div class="col-xs-2"></div>
+<div class="col-xs-8">
+  <form class="form-horizontal" action="/users" method="post" id="joinForm">
+
+    <div class="form-group" id="divId">
+      <label for="divId" class="col-lg-2 control-label">ID</label>
+      <div class="col-lg-10">
+          <input type="text" class="form-control" id="id"
+                 name="user_id" data-rule-required="true" placeholder="원하는ID를 입력하세요"
+                 maxlength="20" style="ime-mode: disabled">
+          <p style="color: green" hidden="hidden" id="idCheckSuccess"> 사용하실 수 있는 ID입니다. </p>
+          <p style="color: red" hidden="hidden" id="idOnlyEngNum"> 4~12자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다. </p>
+          <p style="color: red" hidden="hidden" id="idCheckFail"> ID가 이미 존재합니다. 다른 ID를 선택하세요. </p>
+      </div>
+    </div>
+
+    <div class="form-group" id="divEmail">
+      <label for="divEmail" class="col-lg-2 control-label">이메일</label>
+      <div class="col-lg-10">
+        <input type="email" class="form-control" id="email" name="email" placeholder="이메일" maxlength="30">
+      </div>
+    </div>
+
+    <div class="form-group" id="divPassword">
+      <label for="divPassword" class="col-lg-2 control-label">패스워드</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="password"
+               name="user_pw" data-rule-required="true" placeholder="패스워드"
+               maxlength="12">
+        <p style="color: red" hidden="hidden" id="pwLengthFail"> 패스워드의 길이는 4자 이상 12자 이내로 해주세요. </p>
+      </div>
+    </div>
+
+    <div class="form-group" id="divPasswordCheck">
+      <label for="divPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="passwordCheck"
+               data-rule-required="true" placeholder="패스워드 확인" maxlength="12">
+        <p style="color: green" hidden="hidden" id="pwCheckSuccess"> 패스워드가 일치합니다. </p>
+        <p style="color: red" hidden="hidden" id="pwCheckFail"> 패스워드와 패스워드 확인이 서로 다릅니다. </p>
+      </div>
+    </div>
+
+    <div class="form-group" id="divName">
+      <label for="divName" class="col-lg-2 control-label">닉네임</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="name"
+               name="user_name" data-rule-required="true" placeholder="사용할 닉네임을 입력하세요" maxlength="10">
+        <p style="color: green" hidden="hidden" id="nameCheckSuccess"> 사용하실 수 있는 닉네임입니다. </p>
+        <p style="color: red" hidden="hidden" id="nameOnlyHanEngNum"> 4~12자의 한글, 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다. </p>
+        <p style="color: red" hidden="hidden" id="nameCheckFail"> 닉네임이 이미 존재합니다. 다른 닉네임을 선택하세요. </p>
+      </div>
+      <div class="form-group" align="center" style="margin-top: 50px">
+        <input type="button" class="btn btn-info" id="join" value="회원가입">
+        <a href="/"><input type="button" class="btn btn-link" id="cancel" value="취소" /></a>
+      </div>
+    </div>
+    <div class="col-xs-2"></div>
+  </form>
+</div>
+<div class="col-xs-2"></div>
+</body>
+</html>

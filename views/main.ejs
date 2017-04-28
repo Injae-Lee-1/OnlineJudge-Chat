@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Main page</title>
+  <meta charset="utf-8">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='stylesheets/codemirror.css'>
+  <link rel='stylesheet' href='stylesheets/eclipse.css'>
+  <link rel='stylesheet' href='stylesheets/chat.css'>
+	
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src="javascripts/codemirror.js"></script>
+  <script src="javascripts/javascript.js"></script>
+  <script src="javascripts/socket.io.js"></script>
+  <script src="javascripts/moment-with-locales.js"></script>
+  <script src="javascripts/moment-timezone-with-data.js"></script>
+  <script src="javascripts/chat.js"></script>
+  <script src="javascripts/file-manager.js"></script>
+  <style>
+    #dropzone
+    {
+      border: 2px dotted #3292A2;
+      height: 100px;
+      color: #92AAB0;
+      text-align: center;
+      font-size: 24px;
+      padding-top: 12px;
+      margin-top: 10px;
+    }
+
+    #filezone
+    {
+      color: #92AAB0;
+      text-align: center;
+      font-size: 24px;
+      padding-top: 10px;
+      margin-top: 40px;
+    }
+	  
+    .tab-pane {
+      margin-top: 10px;
+    }
+	  
+  </style>
+  <script type='text/javascript'>
+    var socket = io();
+    var user_name = '<%= user.user_name %>';
+    var user_id = '<%= user.user_id %>';
+	  
+	socket.on('connect', function () {
+      socket.emit('connected_user_name', { user_name: user_name, user_id: user_id });
+    });
+		
+    socket.on('update_user_list', function (data) {
+      update_user_list(data);
+    });
+		
+    socket.on('receive_msg', function (data) {
+      receive_msg(data);
+    });
+  </script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/"><span class="glyphicon glyphicon-home" style="margin-top: 10px; color: black; font-size: 50px;"></span></a>
+    </div>
+    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="btn btn-link navbar-btn" href='/login/logout'>Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br><br><br><br>
+<div class="container">
+  <ul id="myTab" class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a data-target="#files" id="files-tab" role="tab" data-toggle="tab" aria-controls="files" aria-expanded="true">Files</a>
+    </li>
+    <li role="presentation">
+      <a data-target="#chat" role="tab" id="chat-tab" data-toggle="tab" aria-controls="chat" aria-expanded="false">Chat</a>
+    </li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div role="tabpanel" class="tab-pane fade active in" id="files" aria-labelledby="files-tab">
+      <div id="dropzone">프로젝트 파일을 업로드해주세요.(zip, tar)</div>
+      <div id="filezone">
+        현재 업로드 된 파일이 없습니다.
+      </div>
+      <div id="editorzone">
+        <p id="editor_filename" style="display: none;"></p>
+        <textarea id="editor" style="display: none;"></textarea>
+        <button id="save" style="display: none" class="btn btn-link">저장</button>
+        <button id="compile" style="display: none" class="btn btn-link">실행</button>
+        <button id="close" style="display: none" class="btn btn-link">닫기</button>
+      </div>
+      <br>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="chat" aria-labelledby="chat-tab">
+      <div class="row">
+        <div class="col-sm-4">
+          <ul class="list-group" id="chat_users"></ul>
+		</div>
+        <div class="col-sm-8 chat-total">
+		  <div class="panel-body" id="chat_div">
+            <ul class="chat" id="chat_list"></ul>
+          </div>
+		  <div class="panel-footer">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <select class="btn btn-default btn-md" id="chat_select">
+                  <option>전체</option>
+                </select>
+              </span>
+              <input id="chat_input" type="text" class="form-control input-md" placeholder="내용을 입력하세요." />
+              <span class="input-group-btn">
+                <button class="btn btn-warning btn-md" id="send_chat">전송</button>
+              </span>
+            </div>
+          </div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
